@@ -3,6 +3,7 @@ var get = Em.get;
 
 var ArraySequence = Em.Object.extend(Em.MutableArray, {
 	offset: 0,
+	step: 1,
 
 	content: function () {
 		return Em.A();
@@ -12,7 +13,7 @@ var ArraySequence = Em.Object.extend(Em.MutableArray, {
 		if (idx < 0 || idx >= get(this, 'length')) {
 			return undefined;
 		}
-		return get(this, 'content').objectAt(idx) + (get(this, 'offset') || 0);
+		return get(this, 'content').objectAt(idx);
 	},
 
 	length: function (key, length, old) {
@@ -24,6 +25,8 @@ var ArraySequence = Em.Object.extend(Em.MutableArray, {
 		// setter
 		length = Math.max(0, length) || 0;
 		old = Math.max(0, old) || 0;
+		var offset = get(this, 'offset');
+		var step = get(this, 'step');
 		// difference between old and new values
 		// positive value = added items
 		// negative value = removed items
@@ -32,8 +35,10 @@ var ArraySequence = Em.Object.extend(Em.MutableArray, {
 		var removedCount = Math.max(0, -diff);
 		var startIndex = Math.max(0, old - removedCount);
 		var newItems = [];
+		var index;
 		for (var i = 0; i < addedCount; i++) {
-			newItems.push(i + old);
+			index = i + old;
+			newItems.push(index * step + offset);
 		}
 		this.arrayContentWillChange(startIndex, removedCount, addedCount);
 		content.replace(startIndex, removedCount, newItems);

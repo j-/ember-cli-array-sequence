@@ -1,0 +1,39 @@
+<ul id="output">
+	{{#each val in sequence}}
+		<li>{{val}}</li>
+	{{/each}}
+</ul>
+
+<style>
+#output {
+	height: 275px;
+	overflow: auto;
+}
+</style>
+
+<h3>Length ({{sequence.length}})</h3>
+
+<div class="buttons">
+	<button {{action 'len' -2}}>-2</button>
+	<button {{action 'len' -1}}>-1</button>
+	<button {{action 'len' 1}}>+1</button>
+	<button {{action 'len' 2}}>+2</button>
+</div>
+
+<h3>Offset ({{sequence.offset}})</h3>
+
+<div class="buttons">
+	<button {{action 'offset' -2}}>-2</button>
+	<button {{action 'offset' -1}}>-1</button>
+	<button {{action 'offset' 1}}>+1</button>
+	<button {{action 'offset' 2}}>+2</button>
+</div>
+
+<h3>Step ({{sequence.step}})</h3>
+
+<div class="buttons">
+	<button {{action 'step' -2}}>-2</button>
+	<button {{action 'step' -1}}>-1</button>
+	<button {{action 'step' 1}}>+1</button>
+	<button {{action 'step' 2}}>+2</button>
+</div>
