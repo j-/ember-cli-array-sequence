@@ -9,6 +9,9 @@ var ArraySequence = Em.Object.extend(Em.MutableArray, {
 	}.property(),
 
 	objectAt: function (idx) {
+		if (idx < 0 || idx >= get(this, 'length')) {
+			return undefined;
+		}
 		return get(this, 'content').objectAt(idx) + (get(this, 'offset') || 0);
 	},
 
