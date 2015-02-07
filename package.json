@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-array-sequence",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Generate a sequence of numbers",
   "directories": {
     "doc": "doc",
