@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-cli-array-sequence'
+	name: 'array-sequence'
 };
