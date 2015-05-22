@@ -3,43 +3,31 @@ var get = Em.get;
 
 var ArraySequence = Em.Object.extend(Em.MutableArray, {
 	offset: 0,
-
-	content: function () {
-		return Em.A();
-	}.property(),
+	length: 0,
+	increment: 1,
 
 	objectAt: function (idx) {
-		if (idx < 0 || idx >= get(this, 'length')) {
-			return undefined;
-		}
-		return get(this, 'content').objectAt(idx) + (get(this, 'offset') || 0);
+		var offset = this.get('offset');
+		var increment = this.get('increment');
+		var result = offset + idx * increment;
+		return result;
 	},
 
-	length: function (key, length, old) {
-		var content = get(this, 'content');
-		// default value
-		if (arguments.length <= 1) {
-			return get(content, 'length') || 0;
-		}
-		// setter
-		length = Math.max(0, length) || 0;
-		old = Math.max(0, old) || 0;
-		// difference between old and new values
-		// positive value = added items
-		// negative value = removed items
+	limit: function (key, value) {
+		var old = this.get('length') || 0;
+		var length = Math.max(value || 0, 0);
 		var diff = length - old;
-		var addedCount = Math.max(0, diff);
-		var removedCount = Math.max(0, -diff);
-		var startIndex = Math.max(0, old - removedCount);
-		var newItems = [];
-		for (var i = 0; i < addedCount; i++) {
-			newItems.push(i + old);
+		if (diff === 0) {
+			return length;
 		}
-		this.arrayContentWillChange(startIndex, removedCount, addedCount);
-		content.replace(startIndex, removedCount, newItems);
-		this.arrayContentDidChange(startIndex, removedCount, addedCount);
+		var removedCount = Math.abs(Math.min(diff, 0));
+		var addedCount = Math.max(diff, 0);
+		var index = old - removedCount;
+		this.arrayContentWillChange(index, removedCount, addedCount);
+		this.set('length', length);
+		this.arrayContentDidChange(index, removedCount, addedCount);
 		return length;
-	}.property('content.length')
+	}.property()
 });
 
 export default ArraySequence;

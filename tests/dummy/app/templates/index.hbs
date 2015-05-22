@@ -1,0 +1,21 @@
+
+<h3>Offset ({{seq.offset}})</h3>
+
+<button {{action 'offset' -10}}>-10</button>
+<button {{action 'offset'  -1}}>-1</button>
+<button {{action 'offset'   1}}>+1</button>
+<button {{action 'offset'  10}}>+10</button>
+
+<h3>Length ({{seq.length}})</h3>
+
+<button {{action 'limit' -10}}>-10</button>
+<button {{action 'limit'  -1}}>-1</button>
+<button {{action 'limit'   1}}>+1</button>
+<button {{action 'limit'  10}}>+10</button>
+
+
+<ul>
+{{#each num in seq}}
+	<li>{{num}}</li>
+{{/each}}
+</ul>
