@@ -14,6 +14,7 @@ var ArraySequence = Em.Object.extend(Em.MutableArray, {
 	},
 
 	limit: function (key, value) {
+		value = Number(value);
 		var old = this.get('length') || 0;
 		var length = Math.max(value || 0, 0);
 		var diff = length - old;
