@@ -41,7 +41,7 @@ Length of sequence which can be written and read.
 
 Number (optional, default = `1`)
 
-Increment between sequence items.
+Increment between sequence items. Can be a negative value or even zero.
 
 ## Installing
 
