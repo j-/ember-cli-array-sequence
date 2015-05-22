@@ -9,6 +9,10 @@ var ArraySequence = Em.Object.extend(Em.MutableArray, {
 	objectAt: function (idx) {
 		var offset = this.get('offset');
 		var increment = this.get('increment');
+		var limit = this.get('limit');
+		if (idx < 0 || idx >= limit) {
+			return undefined;
+		}
 		var result = offset + idx * increment;
 		return result;
 	},
@@ -28,7 +32,18 @@ var ArraySequence = Em.Object.extend(Em.MutableArray, {
 		this.set('length', length);
 		this.arrayContentDidChange(index, removedCount, addedCount);
 		return length;
-	}.property()
+	}.property(),
+
+	content: function () {
+		var offset = this.get('offset');
+		var increment = this.get('increment');
+		var limit = this.get('limit');
+		var result = [];
+		for (var i = offset; i < limit; i += increment) {
+			result.push(i);
+		}
+		return result;
+	}.property('offset', 'limit', 'increment')
 });
 
 export default ArraySequence;
