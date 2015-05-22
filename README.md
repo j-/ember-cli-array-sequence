@@ -14,24 +14,34 @@ import ArraySequence from 'array-sequence';
 
 var seq = ArraySequence.create({
 	offset: 1,
-	length: 3
+	limit: 3
 });
 
 console.log(seq.toArray()); // [1, 2, 3]
-seq.set('length', 5);
+seq.set('limit', 5);
 console.log(seq.toArray()); // [1, 2, 3, 4, 5]
 ```
 
 ## Properties
 
-**`offset`**: Number (optional, default = `0`)
+### `offset`
+
+Number (optional, default = `0`)
 
 An offset value to add to each item. Use 0 for zero-based and 1 for one-based
 sequences etc.
 
-**`length`**: Number (optional, default = `0`)
+### `limit`
+
+Number (optional, default = `0`)
 
 Length of sequence which can be written and read.
+
+### `increment`
+
+Number (optional, default = `1`)
+
+Increment between sequence items.
 
 ## Installing
 
