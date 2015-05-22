@@ -12,7 +12,6 @@ var IndexController = Em.Controller.extend({
 		offset: function (inc) {
 			this.incrementProperty('seq.offset', inc);
 		},
-		// calling this function 'length' will break
 		limit: function (inc) {
 			this.incrementProperty('seq.limit', inc);
 		}
